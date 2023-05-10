@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { SlMenu } from 'react-icons/sl';
 import { VscChromeClose } from 'react-icons/vsc';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Route } from 'react-router-dom';
 
 import './style.scss';
 
@@ -74,7 +74,9 @@ const Header = () => {
     <header className={`header ${mobileMenu ? 'mobileView' : ''} ${show}`}>
       <ContentWrapper>
         <div className='logo'>
-          <img src={logo} alt='logo-image' />
+          <a href='/'>
+            <img src={logo} alt='logo-image' />
+          </a>
         </div>
         <ul className='menuItems'>
           <li className='menuItem' onClick={() => navigationHandler('movie')} >Movies</li>
@@ -95,23 +97,25 @@ const Header = () => {
           )}
         </div>
       </ContentWrapper>
-      {showSearch && (
-        <div className='searchBar'>
-          <ContentWrapper>
-            <div className='searchInput'>
-              <input
-                type='text'
-                placeholder='Search for a movie or tv show...'
-                className=''
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyUp={searchQueryHandler}
-              />
-              <VscChromeClose onClick={() => setShowSearch(false)} />
-            </div>
-          </ContentWrapper>
-        </div>
-      )}
-    </header>
+      {
+        showSearch && (
+          <div className='searchBar'>
+            <ContentWrapper>
+              <div className='searchInput'>
+                <input
+                  type='text'
+                  placeholder='Search for a movie or tv show...'
+                  className=''
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyUp={searchQueryHandler}
+                />
+                <VscChromeClose onClick={() => setShowSearch(false)} />
+              </div>
+            </ContentWrapper>
+          </div>
+        )
+      }
+    </header >
   );
 };
 
